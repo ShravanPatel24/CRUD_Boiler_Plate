@@ -13,7 +13,7 @@ export class TypeOrmConnectionService implements TypeOrmOptionsFactory {
 	/**
 	 * @param _envConfig
 	 */
-	constructor(private readonly _envConfig: ConfigService, @Inject(ISecretManager) private _secretManager: ISecretManager) { }
+	constructor(private readonly _envConfig: ConfigService, @Inject(ISecretManager) private _secretManager: ISecretManager) {}
 
 	/**
 	 * Passing typeorm configuration options
@@ -22,7 +22,7 @@ export class TypeOrmConnectionService implements TypeOrmOptionsFactory {
 		await this.loadConfiguration()
 		//@todo:: import models dynamically based on config type or database type
 
- 		return {
+		return {
 			type: this._config.type as any, //@todo:: add strict type
 			host: this._config.host,
 			port: parseInt(this._config.port.toString()),

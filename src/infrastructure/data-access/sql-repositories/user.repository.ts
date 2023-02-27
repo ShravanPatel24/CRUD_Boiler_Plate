@@ -1,33 +1,30 @@
-import { Injectable } from '@nestjs/common';
-import { Result, UniqueEntityID } from '@softobiz-df/shared-lib';
+import { Injectable } from '@nestjs/common'
+import { Result, UniqueEntityID } from '@softobiz-df/shared-lib'
 import { EntityManager, IsNull, Not } from 'typeorm'
-import { User } from 'src/domain/user/user';
-import { IUserRepository } from '../irepositories/iuser.repository';
+import { User } from 'src/domain/user/user'
+import { IUserRepository } from '../irepositories/iuser.repository'
 import { UserSqlMapper } from './mappers/user.mapper'
 import { UserModel } from './models/user.model'
 
-
 @Injectable()
 export class UserSqlRepository implements IUserRepository {
-	
-//#region constructor
+	//#region constructor
 	public constructor(private readonly _entityManager: EntityManager, private readonly _mapper: UserSqlMapper) {}
 	//#region private methods
-	
+
 	private async getById(uuid: string) {
 		return this._entityManager.findOne(UserModel, { uuid: uuid, deletedOn: Not(IsNull()) })
 	}
 
 	//#endregion
 	private async getAll() {
-    return this._entityManager.find(UserModel,{})
-  }
+		return this._entityManager.find(UserModel, {})
+	}
 
-  findByUser(_input: string): Promise<Result<User>> {
-    throw new Error('Method not implemented.')
-  }
+	findByUser(_input: string): Promise<Result<User>> {
+		throw new Error('Method not implemented.')
+	}
 	//#endregion
-	
 
 	async save(input: User): Promise<Result<User>> {
 		const persistence = this._mapper.toPersistence(input)
@@ -50,6 +47,4 @@ export class UserSqlRepository implements IUserRepository {
 			return Result.ok()
 		}
 	}
-	
-
 }

@@ -1,4 +1,4 @@
-import { GenericAppError } from '@softobiz-df/shared-lib';
+import { GenericAppError } from '@softobiz-df/shared-lib'
 
 export namespace UserErrors {
 	export class UserNotFound extends GenericAppError.NotFoundError {
