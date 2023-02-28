@@ -22,9 +22,17 @@ export class User extends AggregateRoot<UserProps> {
 	//#endregion
 
 	//#region private setters
-	private setName(firstName: string, lastName: string, email: string) {
+	private setFirstName(firstName: string) {
 		this._props.firstName = firstName
+		return Result.ok(this)
+	}
+
+	private setLastName(lastName: string) {
 		this._props.lastName = lastName
+		return Result.ok(this)
+	}
+
+	private setEmail(email: string) {
 		this._props.email = email
 		return Result.ok(this)
 	}
@@ -34,7 +42,7 @@ export class User extends AggregateRoot<UserProps> {
 	public static create(props: UserProps, id?: UniqueEntityID, dataSource?: eDataSource) {
 		if (dataSource === eDataSource.STORAGE) return Result.ok(new User(props, id))
 		const user = new User(Object.create(null), id)
-		const validationQueue = [user.setName(props.firstName, props.lastName, props.email)]
+		const validationQueue = [user.setFirstName(props.firstName), user.setLastName(props.lastName), user.setEmail(props.email)]
 		const combinedResult = Result.combine(validationQueue)
 		if (combinedResult.isFailure) return Result.fail<User>(new GenericAppError.DomainError(combinedResult.errorValue()))
 		return Result.ok(user)
