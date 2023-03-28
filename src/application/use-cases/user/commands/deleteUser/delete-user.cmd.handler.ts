@@ -1,9 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { AppLoggerService, IRequestHandler, RecordIdModel, Result, UniqueEntityID } from '@softobiz-df/shared-lib'
-import { query } from 'express'
+import { AppLoggerService, IRequestHandler, RecordIdModel, Result } from '@softobiz-df/shared-lib'
 import { User } from 'src/domain/user'
 import { IUserRepository } from 'src/infrastructure/data-access/irepositories'
-import { UserErrors } from '../../user.error'
 import { DeleteUserCommand } from './delete-user.cmd'
 import { DeleteUserResponseType } from './delete-user.response.type'
 

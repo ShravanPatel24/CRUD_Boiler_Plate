@@ -10,12 +10,16 @@ import { UpdateUserCommand } from '../use-cases/user/commands/updateUser/update-
 import { UpdateUserResponseType } from '../use-cases/user/commands/updateUser/update-user.response.type'
 import { DeleteUserResponseType } from '../use-cases/user/commands/deleteUser/delete-user.response.type'
 import { DeleteUserCommand } from '../use-cases/user/commands/deleteUser/delete-user.cmd'
-// import { Param } from '@nestjs/common/decorators/http/route-params.decorator';
 
 @ApiTags('user')
 @Controller('user')
 export class UserController {
 	constructor(private readonly _mediator: IMediator) {}
+
+	@Get()
+	async getUser(@Query('id') id): Promise<GetUserReponseType> {
+		return this._mediator.send<GetUserReponseType>(new GetUserQuery({ id }))
+	}
 
 	@Post('create')
 	async createUser(@Body() payload: UserCreateCommand): Promise<UserCreateResponseType> {
@@ -27,17 +31,12 @@ export class UserController {
 		return this._mediator.send<UpdateUserResponseType>(new UpdateUserCommand(payload))
 	}
 
-	@ApiQuery({ name: 'id', description: 'Gets the Action id' })
-	@Get()
-	async getUser(@Query('id') id): Promise<GetUserReponseType> {
-		return this._mediator.send<GetUserReponseType>(new GetUserQuery({ id }))
-	}
-
 	@Delete()
 	async deleteUser(@Query('id') id: string): Promise<DeleteUserResponseType> {
 		return this._mediator.send<DeleteUserResponseType>(new DeleteUserCommand({ id }))
 	}
 
+	@ApiQuery({ name: 'id', description: 'Gets the Action id' })
 	@Get('health')
 	async getHealth(): Promise<Result<string>> {
 		return Result.ok(' Service running ')

@@ -1,4 +1,3 @@
-import { Inject } from '@nestjs/common'
 import { ErrorProcessingService } from './error-processing.service'
 import { IErrorProcessingService } from './error-processing.service.abstract'
 

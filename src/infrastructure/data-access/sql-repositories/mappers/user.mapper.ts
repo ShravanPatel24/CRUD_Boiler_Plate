@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { eDataSource, EmailAddress, IDTO, IMapper, UniqueEntityID } from '@softobiz-df/shared-lib'
+import { eDataSource, IDTO, IMapper, UniqueEntityID } from '@softobiz-df/shared-lib'
 import { User } from 'src/domain/user/user'
 import { UserModel } from '../models/user.model'
 
