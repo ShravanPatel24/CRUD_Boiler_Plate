@@ -28,7 +28,7 @@ async function bootstrap() {
 	app.setGlobalPrefix(`${appConfig.get(EnvKeyConstants.APP_ROUTE_PREFIX)}`)
 
 	//global filters
-	app.useGlobalFilters(new HttpExceptionFilter())
+	// app.useGlobalFilters(new HttpExceptionFilter())
 	app.useGlobalInterceptors(new ResponseTransformerInterceptor<IDynamicProps>())
 	app.useGlobalPipes(new RequestValidationPipe())
 

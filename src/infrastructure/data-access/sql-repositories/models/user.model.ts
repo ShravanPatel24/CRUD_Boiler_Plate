@@ -1,7 +1,7 @@
 import { Column, Entity } from 'typeorm'
 import { BaseModel } from './base.model'
 
-@Entity({ name: 'Users' })
+@Entity({ name: 'UserDB' })
 export class UserModel extends BaseModel {
 	//#region constructors
 	public constructor(init?: Partial<UserModel>) {
